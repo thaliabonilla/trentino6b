@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+        <p:growl id="msj" autoUpdate="true"/>
+        <h:form>
+        <p:outputLabel value="ID"/>
+        <p:inputText value="#{mascotaBean.mascota.idMascota}" required="true"/>
+        <p:outputLabel value="Nombre Mascota"/>
+        <p:inputText value="#{mascotaBean.mascota.nombreMascota}" required="true"/>
+        <p:outputLabel value="Nombre Dueño"/>
+        <p:inputText value="#{mascotaBean.mascota.nombreCliente}" required="true"/>
+        <p:outputLabel value="Raza"/>
+        <p:inputText value="#{mascotaBean.mascota.raza}" required="true"/>
+        <p:commandButton value="Registrar" actionListener="#{mascotaBean.guardar()}"/>
+        </h:form>
+        
+    </body>
+</html>
