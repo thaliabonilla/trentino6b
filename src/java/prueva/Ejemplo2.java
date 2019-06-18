@@ -24,11 +24,11 @@ public class Ejemplo2 {
         
         Session sesion = HibernateUtil.getSessionfactory().openSession();
         
-        lista = mascotadao.listarMascota(sesion);
+       /*lista = mascotadao.listarMascota(sesion);
         
         for(Mascota mascota : lista){
             System.out.println(mascota.getNombreMascota());
-        }
+        }*/
     
     }
     

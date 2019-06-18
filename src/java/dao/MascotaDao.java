@@ -23,7 +23,8 @@ public class MascotaDao implements IMascota{
     }
     
      @Override
-    public ArrayList<Mascota> listarMascota(Session sesion) {
+    public ArrayList<Mascota> listarMascota() {
+        Session sesion = HibernateUtil.getSessionfactory().openSession();
         ArrayList<Mascota> list = new ArrayList<>();  
         Query query = sesion.createQuery("FROM Mascota");
         list = (ArrayList<Mascota>)query.list();
@@ -33,11 +34,12 @@ public class MascotaDao implements IMascota{
     
     }
     @Override
-    public void ActualizaMascota(Session session, Mascota mascota) {
-        Transaction transaction = session.beginTransaction();
-        session.update(mascota);
+    public void ActualizaMascota(Mascota mascota) {
+        Session sesion = HibernateUtil.getSessionfactory().openSession();
+        Transaction transaction = sesion.beginTransaction();
+        sesion.update(mascota);
         transaction.commit();
-        session.close();
+        sesion.close();
 
     }
 
@@ -67,5 +69,28 @@ public class MascotaDao implements IMascota{
         Integer cont=FilasTab.intValue();
         return cont;
 
+    }
+
+    @Override
+    public boolean delete(Mascota mascota) {
+         Session sesion = null;
+        boolean resp = true;
+        try {
+            sesion = HibernateUtil.getSessionfactory().openSession();
+            sesion.beginTransaction();
+            sesion.delete(mascota);
+            sesion.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("ERROR DAO::" + e);
+            resp = false;
+            sesion.getTransaction().rollback();
+
+        } finally {
+            if (sesion != null) {
+                sesion.close();
+            }
+        }
+
+        return resp;
     }
 }
